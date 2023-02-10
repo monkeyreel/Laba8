@@ -27,7 +27,7 @@ public class Functions {
         return String.join("", arr);
     }
 
-    public static String newArr(int len) {
+    public static String newAllArr(int len) {
         Scanner in = new Scanner(System.in);
         String[] arr = new String[len];
         int i = 0;
