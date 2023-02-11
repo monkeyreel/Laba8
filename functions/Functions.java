@@ -38,4 +38,12 @@ public class Functions {
         }
         return String.join("", arr);
     }
+
+    public static Boolean isFibonacci(long num) {
+        double tmp = 5 * num * num - 4;
+        double tmp1 = 5 * num * num + 4;
+        double sq = (long)Math.sqrt(tmp);
+        double sq1 = (long)Math.sqrt(tmp1);
+        return sq * sq == tmp || sq1 * sq1 == tmp1;
+    }
 }
