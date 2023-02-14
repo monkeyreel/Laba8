@@ -101,4 +101,38 @@ public class Functions {
         double minNum1 = Math.min((distanceNum(Double.parseDouble(arr[0]), Double.parseDouble(arr[1]), Double.parseDouble(arr[2]), Double.parseDouble(arr[3]))), distanceNum(Double.parseDouble(arr[0]), Double.parseDouble(arr[1]), Double.parseDouble(arr[4]), Double.parseDouble(arr[5])));
         return Math.min(minNum1, distanceNum(Double.parseDouble(arr[2]), Double.parseDouble(arr[3]), Double.parseDouble(arr[5]), Double.parseDouble(arr[5])));
     }
+
+    public static void displayMatrix(int[][] arr) {
+        for (int i = 0; i < arr.length; i++) {  //идём по строкам
+            for (int j = 0; j < arr.length; j++) {//идём по столбцам
+
+                System.out.print(" " + arr[i][j] + " "); //вывод элемента
+            }
+            System.out.println();//перенос строки ради визуального сохранения табличной формы
+        }
+        System.out.println();
+    }
+    public static int[][] newMatrix() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите порядок матрицы: ");
+        int n = in.nextInt();
+        int[][] matrix = new int[n][n];
+        for (int i = 0; i< n; i++) {
+            for (int j = 0; j < n; j++) {
+                matrix[i][j] = in.nextInt();
+            }
+        }
+        return matrix;
+    } //Создание матрицы n-порядка
+
+    public static int[][] swapMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length - i; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[matrix.length - 1 - j][matrix.length - 1 - i];
+                matrix[matrix.length - 1 - j][matrix.length - 1 - i] = tmp;
+            }
+        }
+        return matrix;
+    }
 }
