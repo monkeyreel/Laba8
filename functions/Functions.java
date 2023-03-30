@@ -106,7 +106,7 @@ public class Functions {
         for (int i = 0; i < arr.length; i++) {  //идём по строкам
             for (int j = 0; j < arr.length; j++) {//идём по столбцам
 
-                System.out.print(" " + arr[i][j] + " "); //вывод элемента
+                System.out.print("\t" + arr[i][j] + "\t"); //вывод элемента
             }
             System.out.println();//перенос строки ради визуального сохранения табличной формы
         }

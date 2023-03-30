@@ -12,7 +12,7 @@ public class Zad7 {
             n = in.nextInt();
         }
         int[][] arr = new int[n][n];
-        chet(arr, n);
+        fill(arr, n);
     }
     public static void fill(int[][] arr, int n) {
         int k = 0, score = 1;
