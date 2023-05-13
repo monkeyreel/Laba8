@@ -104,7 +104,7 @@ public class Functions {
 
     public static void displayMatrix(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {  //идём по строкам
-            for (int j = 0; j < arr.length; j++) {//идём по столбцам
+            for (int j = 0; j < arr[0].length; j++) {//идём по столбцам
 
                 System.out.print("\t" + arr[i][j] + "\t"); //вывод элемента
             }
