@@ -1,30 +1,30 @@
 import java.util.Scanner;
-
-import static functions.Functions.displayMatrix;
-
 public class Zad7 {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите порядок матрицы:");
-        int n = in.nextInt();
-        while (n<0) {
-            System.out.println("Повторите ввод!");
-            n = in.nextInt();
+        Scanner chis = new Scanner(System.in);
+        System.out.println("Введите N");
+        int n = chis.nextInt();
+        int[][] mas = new int[n][n];
+        int sch = 1;int m=n;
+        for (int i = 0; i < n; i++) {
+            for (int g = 0; g < m; g++) {
+                mas[g][i] = sch++;
+                if (g == m - 1) {
+                    for (int a = i + 1; a < n; a++) {
+                        mas[g][a] = sch++;
+                    }
+                    m--;
+                }
+            }
         }
-        int[][] arr = new int[n][n];
-        fill(arr, n);
+        printMas(mas);
     }
-    public static void fill(int[][] arr, int n) {
-        int k = 0, score = 1;
-        while (k<n) {
-            for (int i = 0; i < n-k; i++) {
-                arr[i][k] = score++;
+    public static void printMas(int[][] array) {
+        for (int i=0; i<=array.length-1; i++) {
+            for (int j=0; j<=array[0].length-1; j++) {
+                System.out.print(array[i][j]+"\t");
             }
-            for (int i=k+1;i<n;i++){
-                arr[n-1-k][i] = score++;
-            }
-            k++;
+            System.out.println();
         }
-        displayMatrix(arr);
     }
 }

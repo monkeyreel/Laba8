@@ -1,44 +1,40 @@
 import java.util.Scanner;
-
+import java.util.Random;
 public class Zad10 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите количество точек");
+        Random run = new Random();
         int n= sc.nextInt();
-        double[][] mas = new double[2][n];
-
-        for (int i=0;i<n;i++){
-            System.out.println("X");
-            mas[0][i]= sc.nextDouble();
-            System.out.println("Y");
-            mas[1][i]= sc.nextDouble();
+        int[][] mas_1 = new int[2][n];
+        for (int i=0;i<n;i++){//Заполнение массива автоматом//
+            mas_1[0][i]= run.nextInt(-4,8);
+            mas_1[1][i]=run.nextInt(-4,6);
         }
-
         for (int i=0;i<n;i++){
-            int pop=FIGURE(mas[0][i],mas[1][i]);
+            int pop=FIGURE(mas_1[0][i],mas_1[1][i]);
             if (pop==1){
-                System.out.println("Точка ("+mas[0][i]+";"+mas[1][i]+") Попала в область");
+                System.out.println("Точка ("+mas_1[0][i]+";"+mas_1[1][i]+") Попала в область");
             }
             if (pop==-1) {
-                System.out.println("Точка (" + mas[0][i] + ";" + mas[1][i] + ") Не попала в область");
+                System.out.println("Точка (" + mas_1[0][i] + ";" + mas_1[1][i] + ") Не попала в область");
             }
             if (pop==0) {
-                System.out.println("Точка (" + mas[0][i] + ";" + mas[1][i] + ") Попала на границу");
+                System.out.println("Точка (" + mas_1[0][i] + ";" + mas_1[1][i] + ") Попала на границу");
             }
         }
     }
-    public static int FIGURE(double x, double y) {
-        if (fig(x,y)==1){
+    public static int FIGURE(int x, int y) {
+        if (fig_1(x,y)==1){
             return 1;
         }
-        else if (fig(x,y)==0) {
+        else if (fig_1(x,y)==0) {
             return 0;
         }
         else{
             return -1;
         }
     }
-    public static int fig(double x, double y) {
+    public static int fig_1(double x, double y) {
         double v1 = Math.pow(x + 1, 2) + Math.pow(y - 1, 2), v2 = Math.pow(x - 4, 2) + Math.pow(y + 1, 2);
         if  (((x>=-1 & x<=1 & y>=-1 & y<=5 & y<-1.5*x+3.5 & y>3*x-1 & y>-2*x-1)||
                 (y>=-1 & y<=3 & x>=-3 & x<=-1 & y<v1 & y>-v1))||(((x>=2 & x<=4 & y>=0 & y<=1 & y>-x+3)||(x>=2 & x<=3 & y<=0 & y>=-1 & y<x-3)||
@@ -51,4 +47,3 @@ public class Zad10 {
         return -1;
     }
 }
-

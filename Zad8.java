@@ -1,72 +1,54 @@
+import static java.lang.System.out;
+import static java.lang.Math.*;
 import java.util.Scanner;
-
-import static functions.Functions.displayMatrix;
-
 public class Zad8 {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите порядок матрицы:");
-        int n = in.nextInt();
-        while (n<0) {
-            System.out.println("Повторите ввод!");
-            n = in.nextInt();
-        }
-        int[][] arr = new int[n][n];
-        fill1(arr, n);
-        fill2(arr, n);
-        fill3(arr, n);
-        fill4(arr, n);
-        displayMatrix(arr);
+    public static void main(String args[]) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите n - половина матрицы");
+        int n = scan.nextInt();
+        int[][] myMas2 = new int[2 * n][2 * n];
+        MMM(myMas2,n,1);MMM(myMas2,n,2);MMM(myMas2,n,3);MMM(myMas2,n,4);
+        printMas2(myMas2);
     }
-
-    public static void fill1(int[][] arr, int n) {
-        int k=0, score=1;
-        while (k<n/4.f) {
-            for (int i=0; i<n/2-1-2*k; i++) {
-                arr[i][k] = score++;
-            }
-            for (int i=0; i<=n/2-1-2*k;i++) {
-                arr[n/2-1-i-2*k][i+k] = score++;
-            }
-            k++;
-        }
-    }
-    public static void fill2(int[][] arr, int n) {
-        int k = 0, score = 1;
-
-        while (k < n / 4.f) {
-            for (int i = 0; i < n / 2 - 1 - 2 * k; i++) {
-                arr[i][k+n/2] = score++;
-            }
-            for (int i = 0; i <= n / 2 - 1 - 2 * k; i++) {
-                arr[n / 2 - 1 - i - 2 * k][i + k+n/2] = score++;
-            }
-            k++;
-        }
-    }
-    public static void fill3(int[][] arr, int n){
-            int k = 0, score = 1;
-            while (k < n / 4.f) {
-                for (int i = 0; i < n / 2 - 1 - 2 * k; i++) {
-                    arr[i+n/2][k] = score++;
+    public static void MMM(int[][] myMas2,int n,int pp){
+        int k = 0, sch = 1;
+        while (k <= ceil(n / 3)) {
+            for (int i = numb(pp,n); i <numb1(pp)*n - 1; i++) {
+                int y = i + 1;
+                for (int x = numb2(pp,n); x < numb3(pp)*n - i; x++) {
+                    if (myMas2[x][i] == 0) {
+                        myMas2[x][i] = sch++;
+                    }
                 }
-                for (int i = 0; i <= n / 2 - 1 - 2 * k; i++) {
-                    arr[n - 1 - i - 2 * k][i + k] = score++;
-                }
-                k++;
+                for (int x = i * 2; x < numb4(pp)*n - 1; x++) {
+                    myMas2[pp*n - x - 2][y] = sch++;
+                    y++;
+                }k++;
             }
-        }
-    public static void fill4(int[][] arr, int n) {
-        int k = 0, score = 1;
-        while (k < n / 4.f) {
-            for (int i = 0; i < n / 2 - 1 - 2 * k; i++) {
-                arr[i+n/2][k+n/2] = score++;
-            }
-            for (int i = 0; i <= n / 2 - 1 - 2 * k; i++) {
-                arr[n - 1 - i - 2 * k][i + k+ n/2] = score++;
-            }
-            k++;
         }
     }
-
+    public static int numb(int m,int n){
+        if (m==1||m==2){return 0;}
+        return n;}
+    public static int numb1(int n){
+        if(n==1||n==2){return 1;}
+        return 2;}
+    public static int numb2(int m,int n){
+        if (m ==2||m ==4){return n;}
+        return 0;}
+    public static int numb3(int n){
+        if (n ==2||n ==3){return 2;}
+        else if (n==4) {return 3;}
+        return 1;}
+    public static int numb4(int n){
+        if (n ==1||n ==2){return 1;}
+        return 3;}
+    public static void printMas2(int[][] array) {
+        for (int i=0; i<=array.length-1; i++) {
+            for (int j=0; j<=array[0].length-1; j++) {
+                out.print(array[i][j]+"\t");
+            }
+            out.println();
+        }
+    }
 }

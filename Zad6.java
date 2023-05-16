@@ -1,108 +1,45 @@
-import functions.Functions;
-
+import java.util.Random;
 import java.util.Scanner;
 
-import static functions.Functions.displayMatrix;
-
 public class Zad6 {
-
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Введите кол-во людей:");
-        int n = in.nextInt();
-        while (n <= 0) {
-            System.out.println("Вы допустили ошибку, повторите ввод!");
-            n = in.nextInt();
+        Scanner ms = new Scanner(System.in);
+        System.out.println("Введите число N");
+        int n = ms.nextInt();
+        System.out.println("Введите параметр δ ");
+        double m = ms.nextDouble();
+        int[][] mas_2 = new int[n][3];
+        Random ran = new Random();
+        for (int i = 0; i < n; i++) {
+            mas_2[i][0] = ran.nextInt(40, 100);
+            mas_2[i][1] = ran.nextInt(120, 200);
+            mas_2[i][2] = ran.nextInt(2, 8);
         }
-        double[][] arr = new double[n][4];
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[0].length; j++) {
-                if (j == 0) {
-                    System.out.println("Введите массу " + (i + 1) + "-ого ученика");
-                    arr[i][j] = in.nextDouble();
-                }
-                if (j == 1) {
-                    System.out.println("Введите рост " + (i + 1) + "-ого ученика");
-                    arr[i][j] = in.nextDouble();
-                }
-                if (j == 2) {
-                    System.out.println("Введите успеваемость " + (i + 1) + "-ого ученика");
-                    arr[i][j] = in.nextDouble();
-                }
-                if (j == 3) {
-                    System.out.println("Введите численность семьи " + (i + 1) + "-ого ученика");
-                    arr[i][j] = in.nextDouble();
-                }
-
+        double k = 0;int[] Unik=new int[3];int Uni=0;
+        for (int i = 0; i < n; i++) {
+            if (mas_2[i][2]>Uni){
+                Uni=mas_2[i][2];
+                Unik[0] = mas_2[i][0];
+                Unik[1] = mas_2[i][1];
+                Unik[2] = mas_2[i][2];
             }
         }
-        disMatN(arr);
-        SrZnach(arr);
-        disMatN(ModuleRaz(arr));
-        System.out.println("Введите дельта-окрестность: ");
-        double delta = in.nextDouble();
-        Max(ModuleRaz(arr));
-        SrStat(ModuleRaz(arr), delta);
-    }
-
-    public static double SrZnach(double[][] arr) {
-        double S = 0;
-        for (int i = 0; i < arr.length; i++) {
-            S += arr[i][3];
+        int cnt=0,sum3=0;
+        for (int i =0;i<n;i++) {
+            sum3 += mas_2[i][2];
         }
-        return S / arr.length;
-    }
-
-    public static double[][] ModuleRaz(double[][] arr) {
-        double S = SrZnach(arr);
-        double[][] arr1 = new double[arr.length][2];
-        for (int i = 0; i < arr.length; i++) {
-            arr1[i][0] = i + 1;
-        }
-        for (int j = 0; j < arr.length; j++) {
-            arr1[j][1] = Math.abs(S - arr[j][3]);
-        }
-        return arr1;
-    }
-
-    public static void disMatN(double[][] arr) {
-        for (int i = 0; i < arr.length; i++) {  //идём по строкам
-            for (int j = 0; j < arr[0].length; j++) {//идём по столбцам
-
-                System.out.print("\t" + arr[i][j] + "\t"); //вывод элемента
-            }
-            System.out.println();//перенос строки ради визуального сохранения табличной формы
-        }
-        System.out.println();
-    }
-
-    public static void disMat1(double[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + "\t");
-        }
-    }
-
-    public static void Max(double[][] arr) {
-        double maxP = 0;
-        int ind = 0;
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i][1] > maxP) {
-                maxP = arr[i][1];
-                ind = i;
+        double sr3=sum3/n;
+        for (int i = 0;i<n;i++){
+            if(mas_2[i][2]+m>=sr3){
+                mas_2[i][2]=1;
+                cnt++;
             }
         }
-        System.out.println("Уникальный ученик: " + (ind + 1) + "\t" + " Отличие от Ср.знач: " + maxP);
+        printMas2(Unik); System.out.println(cnt+" - кол-во уникальных людей");
     }
-
-
-    public static void SrStat(double[][] arr, double delta) {
-        int k = 0;
-        for (int i=0;i<arr.length;i++) {
-            if (arr[i][1] <= delta) {
-                k+=1;
-            }
+    public static void printMas2(int[] mas) {
+        for (int i=0; i<=mas.length-1; i++) {
+            System.out.print(mas[i]+"\t");
         }
-        System.out.println("Количество среднестат. учеников: " + k);
     }
 }
